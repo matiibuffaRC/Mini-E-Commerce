@@ -1,6 +1,7 @@
 import menuIcon from "../../icons/barsIcon.svg";
 import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useEffect, useState } from "react";
+import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg"
 
 function HeaderComponent() {
     const [menuOpen, setMenuOpen] = useState<boolean>(false); {/**Determinamos si el menú hamburguesa estará disponible */}
@@ -10,12 +11,6 @@ function HeaderComponent() {
     const openMenu = () => {
         if (isMobile === false) return;
         setMenuOpen(prev => !prev);
-
-        // if (menuOpen === false){
-        //     console.log("Se abrió el menú");
-        // }else{
-        //     console.log("El menú se cerró");
-        // }
     }
 
     useEffect(()=>{
@@ -32,42 +27,61 @@ function HeaderComponent() {
     },[])
 
     return (
-        <div className=" h-17.5 w-screen flex flex-row items-center justify-between px-2.5 bg-white shadow-md">
+        <div className="h-17.5 w-screen fixed flex flex-row items-center justify-between px-6 bg-black shadow-md shadow-black/70 border-b border-white/10 text-white z-10">
             
             {/* Capa de opacidad */}
             <div 
-                className={`absolute h-full w-full bg-[#0004] top-0 left-0 ${menuOpen ? " " : "hidden"}`}
+                className={`fixed inset-0 z-20 h-full w-full bg-[#0004] top-0 left-0 ${menuOpen ? " " : "hidden"}`}
                 onClick={openMenu}>
 
             </div>
             
             {/* Title container */}
-            <div className="">
+            <div className="flex flex-row justify-center items-center">
+                {/* <img src={casaBuffaLogo} alt="Casa buffa" className="h-6"/> */}
                 <h2 className="uppercase text-[1.2rem]">Casa Buffa</h2>
             </div>
             
             {/* Buttons container */}
-            <div className="flex flex-row">
+            <div className="flex flex-row ">
                 
-                <div className=" h-5 w-5">
+                <div className=" h-6 w-6 md:hidden invert">
                     <img 
                         src={menuIcon} 
                         alt="menuIcon"
                         onClick={openMenu}/>
                 </div>
-                <nav className={`absolute bg-white h-full w-70 left-0 top-0 border border-red-500 transition-transform duration-300 ease-in-out px-5 flex flex-row justify-between ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                    <ul>
-                        <li className="py-0 my-5 pl-2 text-[1.2rem] border-l-3 border-black" onClick={openMenu}><a href="#">Home</a></li>
-                        <li className="py-0 my-5 pl-2 text-[1.2rem] border-l-3 border-black" onClick={openMenu}>
-                            <a href="#">
-                                Products
-                            </a>
-                        </li>
-                        <li className="py-0 my-5 pl-2 text-[1.2rem] border-l-3 border-black" onClick={openMenu}><a href="#">Cart</a></li>
-                    </ul>
-                    <div className=" py-6" onClick={openMenu}>
-                        <img src={closeMenuIcon} alt="crossIcon" className="w-6 h-6"/>
+
+                <nav className={`absolute border border-[#666] bg-black h-screen w-80 left-0 top-0 transition-transform duration-300 ease-in-out flex flex-col  ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:static md:h-full md:w-full md:translate-x-0 md:transition-none md:flex md:items-center md:border-none z-30`}>
+
+                    <div className="flex flex-col justify-center items-center mt-5 md:hidden ">
+                        <img src={casaBuffaLogo} alt="Casa Buffa" className="h-28"/>
+                        <div className="md:hidden invert absolute top-2 right-1" onClick={openMenu}>
+                            <img src={closeMenuIcon} alt="crossIcon" className="w-5 h-5"/>
+                        </div>
                     </div>
+
+                    <div className="border-t border-[#666] flex flex-row mt-5 md:mt-0 md:border-none">
+                        <ul className="px-5 md:px-0 md:flex md:flex-row md:w-full md:gap-5">
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#F16022]" onClick={openMenu}>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#F16022]" onClick={openMenu}>
+                                <a href="#">
+                                    Products
+                                </a>
+                            </li>
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#F16022]" onClick={openMenu}>
+                                <a href="#">
+                                    Cart
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    
                 </nav>
             </div>
         </div>

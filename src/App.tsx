@@ -1,4 +1,6 @@
 import HeaderComponent from "./components/Header/HeaderComponent";
+import MainComponent from "./components/Main/MainComponent";
+
 
 function App() {
 
@@ -6,6 +8,7 @@ function App() {
     
     <>
       <HeaderComponent></HeaderComponent>
+      <MainComponent></MainComponent>
     </>
   )
 }
