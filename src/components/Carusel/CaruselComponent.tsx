@@ -1,24 +1,23 @@
 import { IgrCarousel, IgrCarouselSlide } from 'igniteui-react';
 import 'igniteui-webcomponents/themes/light/bootstrap.css';
-import panificacion from "../../assets/imgs/Panificacion.jpg"
-import casaBuffa from "../../assets/imgs/casaBuffaLogo.png"
 
+type CaruselComponentProps = {
+    images: string[];
+}
 
-function CaruselComponent() {
+function CaruselComponent({images}: CaruselComponentProps) {
     return (
-    <div className='w-full rounded-2xl overflow-hidden border border-gray-300'>
+    <div className='w-80 md:w-[90%] h-75 md:h-100 lg:h-120 rounded-2xl overflow-hidden border border-[#aaa]'>
         <IgrCarousel hideNavigation={true} hideIndicators={true} interval={5000} disablePauseOnInteraction={true}>
-            <IgrCarouselSlide>
-                <img src={panificacion} alt="" className='h-full w-full object-cover object-center'/>
-            </IgrCarouselSlide>
-
-            <IgrCarouselSlide>
-                <img src={casaBuffa} alt="" className='h-full w-full object-cover object-center'/>
-            </IgrCarouselSlide>
-
-            <IgrCarouselSlide>
-                <img src={panificacion} alt="" className='h-full w-full object-cover object-center'/>
-            </IgrCarouselSlide>
+            {
+                images.map((image, indice) => {
+                    return(
+                        <IgrCarouselSlide key={indice}>
+                            <img src={image} alt="" className='h-full w-full object-cover object-center'/>
+                        </IgrCarouselSlide>
+                    )
+                })
+            }
         </IgrCarousel>
     </div>
     )
