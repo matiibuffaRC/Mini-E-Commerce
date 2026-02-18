@@ -3,9 +3,19 @@ import product2Img from "../imgs/levadura.png";
 import product3Img from "../imgs/CremaIndividual.png";
 import product4Img from "../imgs/Micro105.jpg";
 
-const products: object[] = [
+type Product = {
+    id: number;
+    productName: string;
+    price: number;
+    stock: number;
+    img: string;
+    outstanding: boolean;
+}
+
+
+const products: Product[] = [
     {
-        id:1,
+        id: 1,
         productName: "Harina 000",
         price: 13700,
         stock: 45,
@@ -13,7 +23,7 @@ const products: object[] = [
         outstanding: true
     },
     {
-        id:2,
+        id: 2,
         productName: "Levadura",
         price: 3200,
         stock: 20,
@@ -21,7 +31,7 @@ const products: object[] = [
         outstanding: true
     },
     {
-        id:3,
+        id: 3,
         productName: "Crema ledevit",
         price: 9700,
         stock: 8,
@@ -29,7 +39,7 @@ const products: object[] = [
         outstanding: true
     },
     {
-        id:4,
+        id: 4,
         productName: "Bandeja Micro 105",
         price: 65,
         stock: 9999,
@@ -39,3 +49,5 @@ const products: object[] = [
 ]
 
 export { products }
+export type { Product }
+

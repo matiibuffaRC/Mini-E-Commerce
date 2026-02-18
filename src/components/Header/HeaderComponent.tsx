@@ -27,7 +27,7 @@ function HeaderComponent() {
     },[])
 
     return (
-        <div className="h-17.5 w-screen fixed flex flex-row items-center justify-between px-6 bg-black shadow-md shadow-black/70 border-b border-white/10 text-white z-10">
+        <div className="h-17.5 w-screen fixed flex flex-row items-center justify-between px-6 bg-black shadow-md shadow-black/70 border-b border-white/10 text-white  z-10">
             
             {/* Capa de opacidad */}
             <div 
@@ -63,17 +63,17 @@ function HeaderComponent() {
 
                     <div className="border-t border-[#666] flex flex-row mt-5 md:mt-0 md:border-none">
                         <ul className="px-5 md:px-0 md:flex md:flex-row md:w-full md:gap-5">
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#F16022]" onClick={openMenu}>
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
                                 <a href="#">
                                     Home
                                 </a>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#F16022]" onClick={openMenu}>
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
                                 <a href="#">
                                     Products
                                 </a>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#F16022]" onClick={openMenu}>
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
                                 <a href="#">
                                     Cart
                                 </a>
