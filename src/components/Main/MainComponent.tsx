@@ -38,7 +38,7 @@ function MainComponent() {
                 .map((product:any)=>{
                     return (
                         <div key={product.id} className="product-container max-w-70 md:max-w-60 bg-[#eee] p-2">
-                            <div className="w-50 h-50 md:w-45 md:h-45 flex flex-row justify-center items-center">
+                            <div className="w-50 h-50 md:h-35 md:w-35 lg:w-45 lg:h-45 flex flex-row justify-center items-center">
                                 <img src={product.img} alt="Product image" className="w-full h-full object-cover hover:scale-105 duration-100 ease-in"/>
                             </div>
                             <div className="text-black p-1">
