@@ -4,7 +4,7 @@ import facebookIcon from "../../icons/facebookIcon.svg";
 
 function FooterComponent() {
     return (
-        <div className='bg-[#FF8904] w-full h-25 text-white flex flex-col md:flex-row md:justify-around justify-center items-center'>
+        <div className='bg-[#FF8904] w-full h-25 md:h-18.5 text-white flex flex-col md:flex-row md:justify-around justify-center items-center'>
             <div>
                 <p className='text-[.8rem] text-center'>Ameghino 254 - San Francisco - Córdoba</p>
                 <p className='text-[.8rem] text-center'>Salta 17 - San Francisco - Córdoba</p>

@@ -9,6 +9,7 @@ import { texts } from "../../assets/data/TextsCarusel.ts";
 import "../Animations/animations.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import MapsComponent from "../Maps/MapsComponent";
 
 
 function MainComponent() {
@@ -73,25 +74,28 @@ function MainComponent() {
                 <div className="p-5 md:flex-2 md:mr-10 lg:mr-25">
                     <h2 className="text-[1.6rem] md:text-[2rem] font-bold">Casa Buffa</h2>
                     <h3 className="text-[.9rem]  md:text-[1.1rem] text-[#ccc]">
-                        Somos un comercio dedicado a la materia prima de panificación, desacartables y cotillón. Con nuestras dos sucursales ubicadas en la ciudad de San Francisco y distruimos a la zonas atraves de los transportes y comisionistas de tu confianza.
+                        Somos un comercio dedicado a la materia prima para panificación, desacartables y cotillón. Con nuestras dos sucursales ubicadas en la ciudad de San Francisco y distruimos a la zona através de transportes y comisionistas de tu confianza.
                     </h3>
                 </div>
             </div>
-            <div className="w-screen mx-4 md:my-2.5 py-5 z-5 lg:w-5xl flex flex-row justify-center items-center">
+            <div className="w-screen mx-4 md:my-2.5 py-5 z-5 lg:w-4xl flex flex-row justify-center items-center">
                 <CaruselComponent images={CaruselImages}></CaruselComponent> 
                 {/* Estamos pasando un arreglo[] como props */}
             </div>
             
-            <div className="my-10 flex flex-col justify-center items-center md:max-w-3xl lg:w-5xl ">
+            <div className="my-10 flex flex-col justify-center items-center md:max-w-3xl lg:w-5xl bg-[#eee] md:bg-transparent">
                 <h2 className="bg-orange-400 max-w-70 md:max-w-200 text-center text-[1.3rem] md:text-[1.5rem] py-1 px-5 m-2 md:m-3 text-wrap">Nuestros destacados del momento</h2>
                 <div className="md:hidden">
                     <CaruselProductsComponent products={productosDestacados}></CaruselProductsComponent>
                 </div>
                 
-                <div ref={productsRef}className={`hidden md:flex flex-row justify-center items-center gap-1 md:gap-3 md:m-4 ${visible ? "fade-down" : "opacity-0"}`}> 
+                <div ref={productsRef}className={`hidden md:flex flex-row justify-center items-center gap-1 md:gap-3 md:m-4 md:mb-10 ${visible ? "fade-down" : "opacity-0"}`}> 
                     {printProducts()}
                 </div>
-                
+            </div>
+            <div className="p-2 my-10">
+                <h3 className="text-center my-3 text-[1.4rem] ">Encontranos!</h3>
+                <MapsComponent></MapsComponent>
             </div>
         </div>
     )

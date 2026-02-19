@@ -1,7 +1,8 @@
 import menuIcon from "../../icons/barsIcon.svg";
 import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useEffect, useState } from "react";
-import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg"
+import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg";
+import { Link } from "react-router-dom";
 
 function HeaderComponent() {
     const [menuOpen, setMenuOpen] = useState<boolean>(false); {/**Determinamos si el menú hamburguesa estará disponible */}
@@ -39,7 +40,9 @@ function HeaderComponent() {
             {/* Title container */}
             <div className="flex flex-row justify-center items-center">
                 {/* <img src={casaBuffaLogo} alt="Casa buffa" className="h-6"/> */}
-                <h2 className="uppercase text-[1.2rem]">Casa Buffa</h2>
+                <Link to={`/`}>
+                    <h2 className="uppercase text-[1.2rem]">Casa Buffa</h2>
+                </Link>
             </div>
             
             {/* Buttons container */}
@@ -64,7 +67,7 @@ function HeaderComponent() {
                     <div className="border-t border-[#666] flex flex-row mt-5 md:mt-0 md:border-none">
                         <ul className="px-5 md:px-0 md:flex md:flex-row md:w-full md:gap-5">
                             <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
-                                <a href="#">
+                                <a href="/">
                                     Home
                                 </a>
                             </li>
