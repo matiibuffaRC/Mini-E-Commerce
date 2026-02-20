@@ -7,10 +7,14 @@ type CaruselProductsComponentProps = {
 };
 
 function CaruselProductsComponent({ products }: CaruselProductsComponentProps) {
+    
+    const productExibidos = products.filter(product => product.id < 4);
+
     return (
         <div className="w-full flex flex-row justify-center items-center p-3">
             <IgrCarousel hideIndicators={true} className="bg-transparent">
-                {products.map(product => (
+                {
+                    productExibidos.map(product => (
                     <IgrCarouselSlide key={product.id} className="flex flex-row justify-center items-center bg-transparent">
                         <div className="product-container max-w-70 md:max-w-40 pt-5 px-5 flex flex-col justify-center items-center bg-[#eee]">
 
@@ -32,7 +36,8 @@ function CaruselProductsComponent({ products }: CaruselProductsComponentProps) {
 
                         </div>
                     </IgrCarouselSlide>
-                ))}
+                ))
+                }
             </IgrCarousel>
         </div>
     );
