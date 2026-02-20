@@ -1,5 +1,5 @@
 import HeaderComponent from "./components/Header/HeaderComponent";
-// import MainComponent from "./
+import ScrollToTop from "./components/ScrollToTop/ScrollToTopComponent";
 import FooterComponent from "./components/Footer/FooterComponent";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <HeaderComponent></HeaderComponent>
+      <ScrollToTop /> 
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/producto/:id" element={<ProductPage cart={cart} setCart={setCart} />}/>  
