@@ -94,7 +94,7 @@ function MainComponent() {
                 </div>
             </div>
             <div className="p-2 my-10">
-                <h3 className="text-center my-3 text-[1.4rem] ">Encontranos!</h3>
+                <h3 className="text-center my-3 text-[1.4rem] ">Encontranos en la ciudad!</h3>
                 <MapsComponent></MapsComponent>
             </div>
         </div>

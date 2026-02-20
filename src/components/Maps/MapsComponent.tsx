@@ -10,9 +10,9 @@ function MapsComponent() {
                     width="300" 
                     height="200" 
                     style={{ border: 0 }}
-                    allowfullscreen
+                    allowFullScreen
                     loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"
+                    referrerPolicy="no-referrer-when-downgrade"
                 />
             </div>
             <div className='bg-[#FF8904] p-4 pb-6'>
@@ -22,9 +22,9 @@ function MapsComponent() {
                     width="300" 
                     height="200" 
                     style={{ border: 0 }} 
-                    allowfullscreen 
+                    allowFullScreen 
                     loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade" 
+                    referrerPolicy="no-referrer-when-downgrade" 
                 />
             </div>
         </div>

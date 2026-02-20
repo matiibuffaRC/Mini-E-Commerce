@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import HomePage from "./pages/HomePage/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
+import Catalog from "./pages/Catalog/Catalog";
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
       <HeaderComponent></HeaderComponent>
       <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/producto/:id" element={<ProductPage cart={cart} setCart={setCart} />}/>          
+          <Route path="/producto/:id" element={<ProductPage cart={cart} setCart={setCart} />}/>  
+          <Route path="/catalog" element={<Catalog />} />        
       </Routes>
       
       <FooterComponent></FooterComponent>

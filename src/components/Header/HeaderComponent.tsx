@@ -66,20 +66,20 @@ function HeaderComponent() {
 
                     <div className="border-t border-[#666] flex flex-row mt-5 md:mt-0 md:border-none">
                         <ul className="px-5 md:px-0 md:flex md:flex-row md:w-full md:gap-5">
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
-                                <a href="/">
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904]" onClick={openMenu}>
+                                <Link to="/">
                                     Home
-                                </a>
+                                </Link>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
-                                <a href="#">
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904]" onClick={openMenu}>
+                                <Link to="/catalog">
                                     Products
-                                </a>
+                                </Link>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] hover:bg-[#FF8904]" onClick={openMenu}>
-                                <a href="#">
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904]" onClick={openMenu}>
+                                <Link to="#">
                                     Cart
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
