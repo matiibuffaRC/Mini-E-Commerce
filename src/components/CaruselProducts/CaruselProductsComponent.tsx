@@ -16,24 +16,24 @@ function CaruselProductsComponent({ products }: CaruselProductsComponentProps) {
                 {
                     productExibidos.map(product => (
                     <IgrCarouselSlide key={product.id} className="flex flex-row justify-center items-center bg-transparent">
-                        <div className="product-container max-w-70 md:max-w-40 pt-5 px-5 flex flex-col justify-center items-center bg-[#eee]">
+                        <div className="product-container max-w-70 md:max-w-40 pt-5 px-5 flex flex-col justify-center items-center fade-down bg-[#eee]">
+                            <Link to={`/producto/${product.id}`}>
+                            
+                                <div className="w-40 h-40 md:w-30 md:h-30 flex flex-col justify-center items-center">
+                                    <img
+                                        src={product.img}
+                                        alt={product.productName}
+                                        className="w-full h-full object-cover transition-transform duration-100 ease-in hover:scale-105"
+                                    />
+                                </div>
 
-                            <div className="w-40 h-40 md:w-30 md:h-30 flex flex-col justify-center items-center">
-                                <img
-                                    src={product.img}
-                                    alt={product.productName}
-                                    className="w-full h-full object-cover transition-transform duration-100 ease-in hover:scale-105"
-                                />
-                            </div>
-
-                            <div className="text-black p-1">
-                                <Link to={`/producto/${product.id}`}>
+                                <div className="text-black p-1">
                                     <h3 className="text-[1.1rem] md:text-[.9rem] py-1">
                                         {product.productName}
                                     </h3>
-                                </Link>
-                            </div>
+                                </div>
 
+                            </Link>
                         </div>
                     </IgrCarouselSlide>
                 ))

@@ -11,6 +11,24 @@ function Catalog() {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const [productsSelected, setProductsSelected] = useState<string | null>(null);
 
+    useEffect(()=>{
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+            if (window.innerWidth < 1024 === false){ 
+                setMenuOpen(false);
+            }
+        }
+        addEventListener("resize", handleResize);
+        return () => removeEventListener("resize", handleResize);
+
+    },[]);
+    
+    const toggleMenu = () => {
+        setMenuOpen(prev => !prev);
+        console.log("Menu abierto:", !menuOpen);
+    }
+
+
     const arrayItems = [
         {
             id: 1,
@@ -30,26 +48,6 @@ function Catalog() {
             items: ["A", "B", "C"]
         }
     ]
-
-
-
-    useEffect(()=>{
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 1024);
-            if (window.innerWidth < 1024 === false){ 
-                setMenuOpen(false);
-            }
-        }
-        addEventListener("resize", handleResize);
-        return () => removeEventListener("resize", handleResize);
-
-    },[]);
-    
-    const toggleMenu = () => {
-        setMenuOpen(prev => !prev);
-        console.log("Menu abierto:", !menuOpen);
-    }
-
 
     const printMenu = () => {
         return(
@@ -109,39 +107,31 @@ function Catalog() {
                     )
             }else{
                 return filteredProducts.map(product => (
-                <div
-                    key={product.id}
-                    className="bg-[#eee] transition-all duration-200 fade-down rounded-lg overflow-hidden hover:scale-101 shadow-md hover:shadow-lg"
-                    >
-                    <div className="w-full h-48 overflow-hidden">
-                        <img
-                        src={product.img}
-                        alt="Product image"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                    </div>
+                <div key={product.id} className="bg-[#eee] transition-all duration-200 fade-down rounded-lg overflow-hidden hover:scale-101 shadow-md hover:shadow-lg">
+                    <Link to={`/producto/${product.id}`}>
+                        <div className="w-full h-48 overflow-hidden">
+                            <img src={product.img} alt="Product image" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+                        </div>
 
-                    <div className="text-black p-4">
-                        <Link to={`/producto/${product.id}`}>
-                        <h3 className="text-[1rem] font-semibold transition-colors">
-                            {product.productName}
-                        </h3>
-                        </Link>
-
-                        <p className="text-sm text-gray-600 mt-2 select-none">Desde:</p>
-                        <p className="text-sm font-medium select-none">${product.price}</p>
-                    </div>
+                        <div className="text-black p-4">
+                                <h3 className="text-[1rem] font-semibold transition-colors">
+                                    {product.productName}
+                                </h3>
+                            <p className="text-sm text-gray-600 mt-2 select-none">Desde:</p>
+                            <p className="text-sm font-medium select-none">${product.price}</p>
+                        </div>
+                    </Link>
                 </div>
             ));
             }
     }
 
     return (
-        <div className='pt-18 bg-black min-h-screen text-white flex flex-col lg:flex-row gap-4 pb-2'>
+        <div className='pt-18 bg-black min-h-screen text-white flex flex-col lg:flex-row pb-5 lg:gap-4'>
             
-            <div className='mx-4 lg:mx-0 lg:ml-4 lg:mr-0 my-4 lg:my-0 lg:border lg:border-[#666] py-3'>
+            <div className='mx-4 my-4 lg:mx-0 lg:ml-4 lg:mr-0 lg:my-4 lg:border lg:border-[#666] py-3'>
 
-                <div className="bg-[#111] p-2 relative lg:hidden flex flex-row justify-start items-center gap-1 m-2 border border-white">
+                <div className="bg-[#111] p-2 relative lg:hidden flex flex-row justify-start items-center gap-1  border border-white">
                     <img src={threeDotsIcon} alt="Three dots" className='invert h-3 w-3'/>
                     <h3 onClick={toggleMenu} className='select-none cursor-pointer hover:text-[#FF8904]'>Categorías</h3>
                 </div>
@@ -154,7 +144,7 @@ function Catalog() {
                 
             </div>
 
-            <div className="flex-1 mx-4 lg:mr-5 lg:ml-0 my-4 p-5 border border-[#666]">
+            <div className="flex-1 mx-4 lg:mr-5 lg:ml-0 my-0 lg:my-4 p-5 border border-[#666]">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                     {printProducts(productsSelected)}
                 </div>

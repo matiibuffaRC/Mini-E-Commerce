@@ -40,6 +40,7 @@ function MainComponent() {
         .slice(0, 4)
         .map(product => (
             <div key={product.id} className="product-container max-w-70 md:max-w-60 bg-[#eee] p-2">
+                <Link to={`/producto/${product.id}`}>
                 <div className="w-50 h-50 md:h-35 md:w-35 lg:w-45 lg:h-45 flex justify-center items-center">
                     <img
                         src={product.img}
@@ -49,15 +50,16 @@ function MainComponent() {
                 </div>
 
                 <div className="text-black p-1">
-                    <Link to={`/producto/${product.id}`}>
+                    
                         <h3 className="text-[1.1rem] md:text-[.9rem] py-1">
                             {product.productName}
                         </h3>
-                    </Link>
+                    
 
                     <p className="text-[.9rem] md:text-[.8rem] text-[#333]">Desde:</p>
                     <p className="text-[.8rem]">${product.price}</p>
                 </div>
+                </Link>
             </div>
         ));
 }
