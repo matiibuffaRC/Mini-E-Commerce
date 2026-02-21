@@ -6,11 +6,10 @@ import arrowIcon from "../../icons/arrowIcon.svg";
 
 
     type productPageProps = {
-        cart:any[];
         setCart: React.Dispatch<React.SetStateAction<any[]>>;
     }
 
-function ProductPage({ cart, setCart }: productPageProps){
+function ProductPage({ setCart }: productPageProps){
 
     const navigate = useNavigate();
 
@@ -46,13 +45,36 @@ function ProductPage({ cart, setCart }: productPageProps){
     }
 
     function addProductToCart(product: typeof products[0], quantity:number){
-        const productToAddToCart = {
-            ...product,
-            quantity: quantity,
-            total: quantity * product.price,
-        }
-        setCart(prevCart => [...prevCart, productToAddToCart]);
-        console.log("Carrito: ", [...cart, productToAddToCart]);
+        setCart(prevCart => {
+            const existing = prevCart.find(item => item.id === product.id);
+            const max = product.stock ?? Infinity;
+
+            if (existing) {
+                // aumenta la cantidad sin superar el stock
+                return prevCart.map(item => {
+                    if (item.id !== product.id) return item;
+
+                    const current = Number(item.quantity) ?? 1;
+                    let next = current + quantity;
+                    if (next > max) next = max;
+
+                    return {
+                        ...item,
+                        quantity: next,
+                        total: next * item.price,
+                    }
+                });
+            }
+
+            // nuevo producto
+            const productToAddToCart = {
+                ...product,
+                quantity: Math.min(quantity, max),
+                total: Math.min(quantity, max) * product.price,
+            }
+
+            return [...prevCart, productToAddToCart];
+        });
     }
     
     return (

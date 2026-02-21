@@ -1,10 +1,17 @@
 import menuIcon from "../../icons/barsIcon.svg";
 import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg";
 import { Link } from "react-router-dom";
 
-function HeaderComponent() {
+type HeaderComponentProps = {
+    handleClick: () => void;
+    openCart: boolean;
+    setOpenCart: Dispatch<SetStateAction<boolean>>;
+}
+
+function HeaderComponent({ handleClick, openCart, setOpenCart }: HeaderComponentProps) {
     const [menuOpen, setMenuOpen] = useState<boolean>(false); {/**Determinamos si el menú hamburguesa estará disponible */}
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024); {/* Trabajamos con un booleano */}
 
@@ -13,6 +20,7 @@ function HeaderComponent() {
         if (isMobile === false) return;
         setMenuOpen(prev => !prev);
     }
+
 
     useEffect(()=>{
         const handleWindowResize = () => {
@@ -76,10 +84,8 @@ function HeaderComponent() {
                                     Products
                                 </Link>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904]" onClick={openMenu}>
-                                <Link to="#">
-                                    Cart
-                                </Link>
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] select-none cursor-pointer" onClick={() => { handleClick(); if(isMobile) openMenu();}}>
+                                Cart
                             </li>
                         </ul>
                     </div>
