@@ -20,12 +20,12 @@ function App() {
 
   return (
     <>
-      <HeaderComponent handleClick={handleClickToOpenCart} openCart={openCart} setOpenCart={setOpenCart}></HeaderComponent>
+      <HeaderComponent handleClick={handleClickToOpenCart} setOpenCart={setOpenCart}></HeaderComponent>
       <CartComponent handleClick={handleClickToOpenCart} openCart={openCart} setOpenCart={setOpenCart} cart={cart} setCart={setCart}></CartComponent>
       <ScrollToTop /> 
       <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/producto/:id" element={<ProductPage cart={cart} setCart={setCart} />}/>  
+          <Route path="/producto/:id" element={<ProductPage  setCart={setCart} />}/>  
           <Route path="/catalog" element={<Catalog />} />        
       </Routes>
       

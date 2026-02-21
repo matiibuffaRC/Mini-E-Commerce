@@ -12,14 +12,13 @@ type CartComponentProps = {
 function CartComponent({ handleClick, openCart, cart, setCart}: CartComponentProps) {
     const changeQuantity = (signe:string, idProduct:number) => {
         setCart((prevCart:any[]) => {
-            return prevCart.map(item => {
+            const updated = prevCart.map(item => {
                 if (item.id !== idProduct) return item;
 
                 const max = item.stock ?? Infinity;
                 const current = Number(item.quantity) ?? 1;
 
                 let next = signe === 'add' ? current + 1 : current - 1;
-                if (next < 1) next = 1;
                 if (next > max) next = max;
 
                 return {
@@ -28,6 +27,9 @@ function CartComponent({ handleClick, openCart, cart, setCart}: CartComponentPro
                     total: Number(item.price) * next,
                 };
             });
+
+            // eliminar items con quantity <= 0
+            return updated.filter(item => item.quantity > 0);
         });
     }
 

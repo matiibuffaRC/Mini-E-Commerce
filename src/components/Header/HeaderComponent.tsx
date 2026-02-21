@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 
 type HeaderComponentProps = {
     handleClick: () => void;
-    openCart: boolean;
+    
     setOpenCart: Dispatch<SetStateAction<boolean>>;
 }
 
-function HeaderComponent({ handleClick, openCart, setOpenCart }: HeaderComponentProps) {
+function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
     const [menuOpen, setMenuOpen] = useState<boolean>(false); {/**Determinamos si el menú hamburguesa estará disponible */}
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024); {/* Trabajamos con un booleano */}
 
