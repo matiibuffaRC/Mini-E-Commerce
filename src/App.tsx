@@ -3,7 +3,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTopComponent";
 import FooterComponent from "./components/Footer/FooterComponent";
 import CartComponent from "./components/Cart/CartComponent";
 import { Routes, Route } from "react-router-dom";
-import { use, useState } from "react";
+import { useState } from "react";
 
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -13,7 +13,7 @@ import Catalog from "./pages/Catalog/Catalog";
 function App() {
   const [cart, setCart] = useState<any[]>([]);
   const [openCart, setOpenCart] = useState<boolean>(false);
-  const [total, setTotal] = useState<number | null>(null);
+  const [total, setTotal] = useState<number>(0);
   
   const handleClickToOpenCart = () => {
     setOpenCart(prev => prev = !prev)

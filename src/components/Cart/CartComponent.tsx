@@ -1,5 +1,8 @@
 import type { Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
 import closeMenuIcon from "../../icons/crossIcon.svg";
+import { useParams, useNavigate } from "react-router-dom";
+// import { stringify } from 'querystring';
 
 type CartComponentProps = {
     handleClick: () => void;
@@ -12,11 +15,30 @@ type CartComponentProps = {
 }
 
 function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}: CartComponentProps) {
+
+    const navigate = useNavigate();
+
+    let sumaTotal = 0;
+    useEffect(()=>{
+
+        cart.forEach((item:any)=>{
+            sumaTotal += item.total;
+        })
+        
+        setTotal(sumaTotal);
+
+        console.log("El total cambió: ", sumaTotal);
+
+    },[cart])
+
     const changeQuantity = (signe:string, idProduct:number) => {
         setCart(
             (prevCart:any[])=>{ {/* Trabajamos el carrito con el item seleccionado */}
                 const updatedCart = prevCart.map((item)=>{
                     if (item.id !== idProduct) return item; {/* Si el producto no es el buscado, seguimos */}
+                    
+                    {/* Else.. */}
+
                     const max = item.stock;
                     const current = Number(item.quantity) ?? 1; {/* Si no tiene cantidad definida, es 1 automaticamente */}
                     let action = signe === "add" ? current + 1 : current - 1;
@@ -30,9 +52,22 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                 return updatedCart.filter(item => item.quantity > 0); {/* Devolvemos los items con al menos un pedido */}
             }
         )
+        
     }
 
     const printProductsCart = () =>{
+        if(cart.length === 0){
+            return(
+                <div className='text-white flex flex-col gap-2 justify-center items-center'>
+                    <h3 className='text-center'>No hay productos seleccionados!</h3>
+                    <div className='border border-white flex flex-row justify-center' onClick={()=>{navigate("/catalog"), handleClick()}}>
+                        <a href="#" className='bg-[#FF8904] py-2 px-4 rounded-[20px] hover:bg-[#e97c00]'>
+                            Catálogo
+                        </a>
+                    </div>
+                </div>
+            )
+        }
         return(
             cart.map((productCart:any) =>{ 
                 return(
@@ -73,13 +108,16 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                 </div>
                 
                 {/* Cart Items */}
-                <div className="p-5 text-white flex flex-col gap-1 h-full overflow-y-auto">
+                <div className={`p-5 text-white flex flex-col gap-1 h-full overflow-y-auto ${cart.length === 0 ? "justify-center" : "justify-start" }`}>
                     <div className='flex flex-col gap-2 overflow-auto pr-2'>
                         {printProductsCart()}
                     </div>
                 </div>
-                <div className='border border-white text-white p-5'>
-                    <div className='border border-white'></div>
+                <div className='border border-white text-white py-5 px-3'>
+                    <div className='border-t border-gray-300 flex justify-between'>
+                        <h3 className='pt-1 px-1'>Total: </h3>
+                        <h3 className='pt-1 px-1'>${total}</h3>
+                        </div>
                 </div>
             </div>
         </>
