@@ -101,7 +101,7 @@ function Catalog() {
                 return (
                     <div className="col-span-full flex items-center justify-center min-h-75 text-center">
                         <p className="text-lg text-gray-300">
-                            ¡Lo lamentamos! Por ahora no hay nada disponible.
+                            ¡Lo lamentamos! Por ahora no hay nada disponible en esta categoría.
                         </p>
                     </div>
                     )

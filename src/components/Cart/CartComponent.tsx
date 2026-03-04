@@ -7,46 +7,45 @@ type CartComponentProps = {
     setOpenCart: Dispatch<SetStateAction<boolean>>;
     cart:any;
     setCart:any;
+    total:any;
+    setTotal:any;
 }
 
-function CartComponent({ handleClick, openCart, cart, setCart}: CartComponentProps) {
+function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}: CartComponentProps) {
     const changeQuantity = (signe:string, idProduct:number) => {
-        setCart((prevCart:any[]) => {
-            const updated = prevCart.map(item => {
-                if (item.id !== idProduct) return item;
-
-                const max = item.stock ?? Infinity;
-                const current = Number(item.quantity) ?? 1;
-
-                let next = signe === 'add' ? current + 1 : current - 1;
-                if (next > max) next = max;
-
-                return {
-                    ...item,
-                    quantity: next,
-                    total: Number(item.price) * next,
-                };
-            });
-
-            // eliminar items con quantity <= 0
-            return updated.filter(item => item.quantity > 0);
-        });
+        setCart(
+            (prevCart:any[])=>{ {/* Trabajamos el carrito con el item seleccionado */}
+                const updatedCart = prevCart.map((item)=>{
+                    if (item.id !== idProduct) return item; {/* Si el producto no es el buscado, seguimos */}
+                    const max = item.stock;
+                    const current = Number(item.quantity) ?? 1; {/* Si no tiene cantidad definida, es 1 automaticamente */}
+                    let action = signe === "add" ? current + 1 : current - 1;
+                    if (action > max) action = max;
+                    return {
+                        ...item,
+                        quantity: action,
+                        total: Number(item.price) * action,
+                    };
+                })
+                return updatedCart.filter(item => item.quantity > 0); {/* Devolvemos los items con al menos un pedido */}
+            }
+        )
     }
 
     const printProductsCart = () =>{
         return(
             cart.map((productCart:any) =>{ 
                 return(
-                    <div key={productCart.id} className='border border-white p-1 flex flex-row gap-1 flex-1'>
-                        <div className='border border-white'>
+                    <div key={productCart.id} className='bg-[#232323] p-2 flex flex-row gap-1 flex-1'> {/* Este es cada producto elegido INDIVIDUAL*/}
+                        <div>
                             <img src={productCart.img} alt={`${productCart.productName} image`} className='h-30 w-30' />
                         </div>
-                        <div className='border border-white flex-1 p-2 text-[1.1rem] flex flex-col gap-1'>
+                        <div className='flex-1 p-2 text-[1.1rem] flex flex-col gap-1'>
                             <h3>{productCart.productName}</h3>
                             <div className='flex flex-row items-center gap-1'>
-                                <div className='border border-white px-2 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer' onClick={()=>{changeQuantity('remove', productCart.id)}}>-</div>
-                                <div className='text-[.8rem] flex flex-row justify-center items-center px-1 py-1.5 '>{productCart.quantity}</div>
-                                <div className='border border-white px-2 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer' onClick={()=>{changeQuantity('add',productCart.id)}}>+</div>
+                                <div className='border border-gray-500 hover:bg-gray-500 px-2 pb-1 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer' onClick={()=>{changeQuantity('remove', productCart.id)}}>-</div>
+                                <div className='text-[.9rem] flex flex-row justify-center items-center px-1 py-1.5 select-none'>{productCart.quantity}</div>
+                                <div className='border border-gray-500 hover:bg-gray-500 px-2 pb-1 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer' onClick={()=>{changeQuantity('add',productCart.id)}}>+</div>
                             </div>
                             <h4 className='text-[.8rem]'>${productCart.total}</h4>
                         </div>
@@ -64,9 +63,9 @@ function CartComponent({ handleClick, openCart, cart, setCart}: CartComponentPro
                 onClick={handleClick}>
             </div>
             
-            {/* Cart Panel */}
-            <div className={`h-screen w-80 bg-black fixed top-0 right-0 z-40 transition-transform duration-300 ease-in-out border-l border-[#666] ${openCart ? "translate-x-0" : "translate-x-full"}`}>
-                <div className="flex justify-between items-center p-5 border-b border-[#666]">
+            {/* Panel del carrito */}
+            <div className={`h-screen w-80 bg-black fixed top-0 right-0 z-40 transition-transform duration-300 ease-in-out border-l border-[#666] ${openCart ? "translate-x-0" : "translate-x-full"} flex flex-col justify-between`}>
+                <div className="flex justify-between items-center p-5 border-b border-[#666] ">
                     <h2 className="text-white text-[1.2rem]">Carrito</h2>
                     <div className="invert cursor-pointer" onClick={handleClick}>
                         <img src={closeMenuIcon} alt="Cerrar" className="w-5 h-5"/>
@@ -74,8 +73,13 @@ function CartComponent({ handleClick, openCart, cart, setCart}: CartComponentPro
                 </div>
                 
                 {/* Cart Items */}
-                <div className="p-5 text-white flex flex-col gap-2">
-                    {printProductsCart()}
+                <div className="p-5 text-white flex flex-col gap-1 h-full overflow-y-auto">
+                    <div className='flex flex-col gap-2 overflow-auto pr-2'>
+                        {printProductsCart()}
+                    </div>
+                </div>
+                <div className='border border-white text-white p-5'>
+                    <div className='border border-white'></div>
                 </div>
             </div>
         </>
