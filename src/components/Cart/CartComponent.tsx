@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useNavigate } from "react-router-dom";
 import downArrowIcon from "../../icons/down-arrow.png";
+import "../Animations/animations.css";
 
 type CartComponentProps = {
     handleClick: () => void;
@@ -23,6 +24,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
     const [optionDeliveryMethod, setOptionDeliveryMethod] = useState<string>("Método de entrega");
     const [menuPaymentMethod, setMenuPaymentMethod] = useState<boolean>(false);
     const [optionPaymentMethod, setOptionPaymentMethod] = useState<string>("Forma de pago");
+    const [confirm, setConfirm] = useState<boolean>(false);
 
     useEffect(()=>{
         cart.forEach((item:any)=>{
@@ -35,6 +37,14 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
         console.log(cart)
 
     },[cart])
+
+    useEffect(()=>{
+        if (optionPaymentMethod !== "Forma de pago" && optionDeliveryMethod !== "Método de entrega" && cart.length > 0){
+            setConfirm(true);
+        } else {
+            setConfirm(false);
+        }
+    },[optionPaymentMethod, optionDeliveryMethod, cart])
 
     
     const changeMenuDelivery = () =>{
@@ -53,6 +63,12 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
 
     const changeOptionPayment = (option:string) => {
         setOptionPaymentMethod(option);
+    }
+
+    const handleConfirm = (e: React.MouseEvent<HTMLAnchorElement>) =>{
+        if (!confirm) {
+            e.preventDefault();
+        }
     }
 
     const changeQuantity = (signe:string, idProduct:number) => {
@@ -86,7 +102,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                     <h3 className='text-center'>No hay productos seleccionados!</h3>
                     <div className=' flex flex-row justify-center' onClick={()=>{navigate("/catalog"), handleClick()}}>
                         <a href="#" className='bg-[#FF8904] py-2 px-4 rounded-[20px] hover:bg-[#e97c00]'>
-                            Catálogo
+                            Ver catálogo
                         </a>
                     </div>
                 </div>
@@ -132,19 +148,20 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                 </div>
                 
                 {/* Cart Items */}
-                <div className={`p-5 text-white flex flex-col gap-1 h-full overflow-y-auto ${cart.length === 0 ? "justify-center" : "justify-start" }`}>
+                <div className={`p-5  text-white flex flex-col gap-1 h-full overflow-y-auto ${cart.length === 0 ? "justify-center" : "justify-start" }`}>
                     <div className='flex flex-col gap-2 overflow-auto pr-2'>
                         {printProductsCart()}
                     </div>
                 </div>
-                <div className='border-t border-gray-500 text-white py-5 px-3 flex flex-col gap-2 h-90'>
+
+                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-100'>
                     
-                    <div className='border-t border-gray-300 flex'>
-                        <h3 className='pt-1 px-1'>Total: </h3>
-                        <h3 className='pt-1 px-1'>${total}</h3>
+                    <div className='border-t border-gray-300 flex justify-between'>
+                        <h3 className='pt-1 px-1 text-[1.1rem]'>Total: </h3>
+                        <h3 className='pt-1 px-1 text-[1.1rem]'>${total}</h3>
                     </div>
 
-                    <div className='flex flex-col gap-1'>
+                    <div className='flex flex-col gap-1 mb-6'>
                         <div className='relative'>
                             
                             <button title='delivery-method' className='border border-gray-600 flex w-full justify-between items-center text-[.9rem]  rounded-lg px-1 py-2 cursor-pointer hover:border-[#e97c00]' onClick={()=>changeMenuDelivery()}>
@@ -152,7 +169,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                                 <img src={downArrowIcon} alt="arrow-down" className='invert h-4 w-4 select-none'/>
                             </button>
                             
-                            <div className={`w-74 transition-all duration-200 absolute mt-1 p-1 flex flex-col gap-1 bg-[#111] z-10 right-0 ${menuDeliveryMethod ? "h-31 opacity-100 rounded-md" : "h-0 opacity-0 hidden"}`}>
+                            <div className={`w-74 transition-all duration-50 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 right-0 ${menuDeliveryMethod ? "h-31 opacity-100 rounded-md fade-down-cart" : "h-0 opacity-0 hidden"}`}>
 
                                 <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Retiro personalmente en Ameghino"), changeMenuDelivery()}}>
                                     <p className='pl-1'>Retiro personalmente en Ameghino</p>
@@ -175,9 +192,9 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                                 <img src={downArrowIcon} alt="arrow-down" className='invert h-4 w-4'/>
                             </button>
 
-                            <div className={`w-74 transition-all duration-100 absolute mt-1 p-1 flex flex-col gap-1 bg-[#111] z-10 -top-33 right-0 ${menuPaymentMethod ? "h-31 opacity-100 rounded-md" : "h-0 opacity-0 hidden"}`}>
+                            <div className={`w-74 transition-all duration-50 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 -top-33 right-0 ${menuPaymentMethod ? "h-31 opacity-100 rounded-md fade-down-invert" : "h-0 opacity-0 hidden"}`}>
 
-                                <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Tarjeta"), changeMenuPayment()}}>
+                                <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Tarjeta"), changeMenuPayment()}}>  
                                     <p className='pl-1'>Tarjeta de débito / crédito</p>
                                 </div>
                                 <div className='group text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Transferencia (10% OFF)"), changeMenuPayment()}}>
@@ -187,6 +204,12 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                                     <p className='pl-1'>Efectivo <span className='text-[#FF8904] group-hover:text-white'>20% OFF</span></p>
                                 </div>
 
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className={` bg-[#8f5300] text-[.9rem] text-center mt-1 p-2 rounded-md select-none ${confirm ? "cursor-pointer bg-[#e97c00]" : " "}`}>
+                                <a href="#" target='__blank' className={`${confirm ? "cursor-pointer bg-[#e97c00]" : "cursor-default"}`} onClick={(e)=>handleConfirm(e)}>Finalizar pedido vía WhatsApp</a>
                             </div>
                         </div>
                     </div>
