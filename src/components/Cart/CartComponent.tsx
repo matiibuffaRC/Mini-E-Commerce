@@ -25,6 +25,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
     const [menuPaymentMethod, setMenuPaymentMethod] = useState<boolean>(false);
     const [optionPaymentMethod, setOptionPaymentMethod] = useState<string>("Forma de pago");
     const [confirm, setConfirm] = useState<boolean>(false);
+    const [finalPrice, setFinalPrice] = useState<number>(0);
 
     useEffect(()=>{
         cart.forEach((item:any)=>{
@@ -45,6 +46,16 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
             setConfirm(false);
         }
     },[optionPaymentMethod, optionDeliveryMethod, cart])
+
+    useEffect(()=>{
+        if (optionPaymentMethod === "Transferencia (10% OFF)"){
+            setFinalPrice(Number((total - (total * 0.1)).toFixed(2)));
+        } else if (optionPaymentMethod === "Efectivo (20% OFF)"){
+            setFinalPrice(Number((total - (total * 0.2)).toFixed(2)));
+        } else {
+            setFinalPrice(Number(total.toFixed(2)));
+        }
+    },[optionPaymentMethod, total])
 
     
     const changeMenuDelivery = () =>{
@@ -154,11 +165,19 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                     </div>
                 </div>
 
-                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-100'>
+                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-110'>
                     
-                    <div className='border-t border-gray-300 flex justify-between'>
-                        <h3 className='pt-1 px-1 text-[1.1rem]'>Total: </h3>
-                        <h3 className='pt-1 px-1 text-[1.1rem]'>${total}</h3>
+                    <div className='border-t border-gray-300'>
+                        <div className='flex justify-between'>
+                            <h3 className='pt-1 px-1 text-[1.1rem]'>Total: </h3>
+                            <h3 className={`pt-1 px-1 text-[1.1rem] ${finalPrice !== total && finalPrice > 0 ? "line-through" : "" }`}>${total}</h3>
+                        </div>
+                        {finalPrice !== total && finalPrice > 0 && (
+                            <div className='flex justify-between'>
+                                <h3 className='px-1 text-[#FF8904]'>Con descuento:</h3>
+                                <h3 className='px-1 text-[#FF8904]'>${finalPrice}</h3>
+                            </div>
+                        )}
                     </div>
 
                     <div className='flex flex-col gap-1 mb-6'>
