@@ -1,5 +1,3 @@
-import React from 'react';
-
 function MapsComponent() {
     return (
         <div className='flex flex-col md:flex-row gap-4'>
