@@ -87,7 +87,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
         setOptionPaymentMethod(option);
     }
 
-    const handleConfirm = (e: React.MouseEvent<HTMLAnchorElement>) =>{
+    const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) =>{
         if (!confirm) {
             e.preventDefault();
             return;
