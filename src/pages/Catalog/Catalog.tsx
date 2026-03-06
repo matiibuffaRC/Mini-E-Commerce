@@ -32,18 +32,22 @@ function Catalog() {
     const arrayItems = [
         {
             id: 1,
+            title: "Todos los productos",
+            items: []
+        },{
+            id: 2,
             title: "Panificación",
             items: ["Margarinas", "Dulces", "Premezclas", "Harinas"]
         },{
-            id: 2,
+            id: 3,
             title: "Repostería",
             items: ["Cremas", "B", "C"]
         },{
-            id: 3,
+            id: 4,
             title: "Descartables",
             items: ["Bandejas plasticas", "B", "C"]
         },{
-            id: 4,
+            id: 5,
             title: "Cotillón",
             items: ["A", "B", "C"]
         }
@@ -79,6 +83,10 @@ function Catalog() {
 
     const handleClick = (indice: number) => {
         setSelected(prev => prev === indice ? null : indice);
+        // Si se hace click en "Todos los productos", limpiar el filtro
+        if (indice === 1) {
+            setProductsSelected(null);
+        }
     };
 
     const handleProductClick = (productType: string) => {
@@ -107,14 +115,14 @@ function Catalog() {
                     )
             }else{
                 return filteredProducts.map(product => (
-                <div key={product.id} className="bg-[#eee] transition-all duration-200 fade-down rounded-lg overflow-hidden hover:scale-101 shadow-md hover:shadow-lg">
+                <div key={product.id} className="bg-[#eee] transition-all duration-200 fade-down rounded-xl overflow-hidden hover:scale-101 shadow-md hover:shadow-lg">
                     <Link to={`/producto/${product.id}`}>
-                        <div className="w-full h-48 overflow-hidden">
+                        <div className="w-full h-50 overflow-hidden">
                             <img src={product.img} alt="Product image" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
                         </div>
 
-                        <div className="text-black p-4">
-                                <h3 className="text-[1rem] font-semibold transition-colors">
+                        <div className="text-black py-2 px-3">
+                                <h3 className="text-[.9rem] font-semibold transition-colors">
                                     {product.productName}
                                 </h3>
                             <p className="text-sm text-gray-600 mt-2 select-none">Desde:</p>
@@ -127,11 +135,11 @@ function Catalog() {
     }
 
     return (
-        <div className='pt-18 bg-black min-h-screen text-white flex flex-col lg:flex-row pb-5 lg:gap-4'>
+        <div className='pt-18 bg-black min-h-screen text-white flex flex-col lg:flex-row pb-0 lg:gap-4 h-[calc(100vh-72px)]'>
             
-            <div className='mx-4 my-4 lg:mx-0 lg:ml-4 lg:mr-0 lg:my-4 lg:border lg:border-[#666] py-3'>
+            <div className='mx-4 my-4 lg:mx-0 lg:ml-4 lg:mr-0 lg:my-4 lg:border lg:border-[#666] py-3 overflow-hidden'>
 
-                <div className="bg-[#111] p-2 relative lg:hidden flex flex-row justify-start items-center gap-1  border border-white">
+                <div className="bg-[#111] p-2 relative lg:hidden flex flex-row justify-start items-center gap-1  border border-[#666]">
                     <img src={threeDotsIcon} alt="Three dots" className='invert h-3 w-3'/>
                     <h3 onClick={toggleMenu} className='select-none cursor-pointer hover:text-[#FF8904]'>Categorías</h3>
                 </div>
@@ -144,8 +152,8 @@ function Catalog() {
                 
             </div>
 
-            <div className="flex-1 mx-4 lg:mr-5 lg:ml-0 my-0 lg:my-4 p-5 border border-[#666]">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="flex-1 mx-4 lg:mr-5 lg:ml-0 my-4 lg:my-4 p-5 border border-[#666] overflow-y-auto">
+                <div key={productsSelected} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                     {printProducts(productsSelected)}
                 </div>
             </div>

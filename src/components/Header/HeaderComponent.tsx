@@ -3,6 +3,7 @@ import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg";
+import cartIcon from "../../icons/shopping-cart.png";
 import { Link } from "react-router-dom";
 
 type HeaderComponentProps = {
@@ -63,7 +64,7 @@ function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
                         onClick={openMenu}/>
                 </div>
 
-                <nav className={`absolute border border-[#666] bg-black h-screen w-80 left-0 top-0 transition-transform duration-300 ease-in-out flex flex-col  ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:static md:h-full md:w-full md:translate-x-0 md:transition-none md:flex md:items-center md:border-none z-30`}>
+                <nav className={`absolute border border-[#666] bg-black h-screen w-80 left-0 top-0 transition-transform duration-600 ease-in-out flex flex-col  ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:static md:h-full md:w-full md:translate-x-0 md:transition-none md:flex md:items-center md:border-none z-30`}>
 
                     <div className="flex flex-col justify-center items-center mt-5 md:hidden ">
                         <img src={casaBuffaLogo} alt="Casa Buffa" className="h-28"/>
@@ -73,19 +74,19 @@ function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
                     </div>
 
                     <div className="border-t border-[#666] flex flex-row mt-5 md:mt-0 md:border-none">
-                        <ul className="px-5 md:px-0 md:flex md:flex-row md:w-full md:gap-5">
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904]" onClick={openMenu}>
-                                <Link to="/">
+                        <ul className="px-5 md:px-0 md:flex md:flex-row md:w-full md:gap-3">
+                            <li className="py-0 my-7.5 md:my-0 text-[1.2rem] border-l border-white md:border-none md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] transition duration-300">
+                                <Link to="/" className="block w-full h-full pl-2 md:px-5 md:py-1" onClick={openMenu}>
                                     Home
                                 </Link>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904]" onClick={openMenu}>
-                                <Link to="/catalog">
-                                    Products
+                            <li className="py-0 my-7.5 md:my-0 text-[1.2rem] border-l border-white md:border-none md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] transition duration-300">
+                                <Link to="/catalog" className="block w-full h-full pl-2 md:px-5 md:py-1" onClick={openMenu}>
+                                    Productos
                                 </Link>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] select-none cursor-pointer" onClick={() => { handleClick(); if(isMobile) openMenu();}}>
-                                Cart
+                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] select-none cursor-pointer transition duration-300" onClick={() => { handleClick(); if(isMobile) openMenu();}}>
+                                Cart 
                             </li>
                         </ul>
                     </div>

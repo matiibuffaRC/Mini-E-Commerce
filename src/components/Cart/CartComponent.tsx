@@ -5,14 +5,25 @@ import { useNavigate } from "react-router-dom";
 import downArrowIcon from "../../icons/down-arrow.png";
 import "../Animations/animations.css";
 
+type CartItem = {
+    id: number;
+    productName: string;
+    price: number;
+    quantity: number;
+    stock: number;
+    total: number;
+    img?: string;
+};
+
+
 type CartComponentProps = {
     handleClick: () => void;
     openCart: boolean;
     setOpenCart: Dispatch<SetStateAction<boolean>>;
-    cart:any;
-    setCart:any;
-    total:any;
-    setTotal:any;
+    cart: CartItem[];
+    setCart: Dispatch<SetStateAction<CartItem[]>>;
+    total: number;
+    setTotal: Dispatch<SetStateAction<number>>;
 }
 
 function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}: CartComponentProps) {
@@ -79,6 +90,29 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
     const handleConfirm = (e: React.MouseEvent<HTMLAnchorElement>) =>{
         if (!confirm) {
             e.preventDefault();
+            return;
+        }
+
+        const productsList = cart
+            .map((product: CartItem) => `• ${product.productName} x${product.quantity} - $${product.price * product.quantity}`)
+            .join("\n");
+
+        const message = `Hola! 👋 Quisiera hacer el siguiente pedido:\n\nMétodo de envío: ${optionDeliveryMethod}\nForma de pago: ${optionPaymentMethod}\n\n${productsList}\n\nTotal sin descuento: $${total}` +
+                        (finalPrice !== total ? `\n*Precio final: $${finalPrice}*` : "");
+        
+        const phoneNumberSalta = "543564507240";
+        const phoneNumberAmeghino = "54356400000";
+        
+        let phoneNumber:string;
+
+        optionDeliveryMethod.includes("Salta") ? phoneNumber = phoneNumberSalta : phoneNumber = phoneNumberAmeghino;
+
+
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        try {
+            window.open(whatsappUrl, "_blank");
+        } catch (err) {
+            console.error("Error abriendo WhatsApp:", err);
         }
     }
 
@@ -165,7 +199,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                     </div>
                 </div>
 
-                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-110'>
+                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-140'>
                     
                     <div className='border-t border-gray-300'>
                         <div className='flex justify-between'>
@@ -180,55 +214,62 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                         )}
                     </div>
 
-                    <div className='flex flex-col gap-1 mb-6'>
-                        <div className='relative'>
-                            
-                            <button title='delivery-method' className='border border-gray-600 flex w-full justify-between items-center text-[.9rem]  rounded-lg px-1 py-2 cursor-pointer hover:border-[#e97c00]' onClick={()=>changeMenuDelivery()}>
-                                <span className='pl-1'>{optionDeliveryMethod}</span>
-                                <img src={downArrowIcon} alt="arrow-down" className='invert h-4 w-4 select-none'/>
-                            </button>
-                            
-                            <div className={`w-74 transition-all duration-50 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 right-0 ${menuDeliveryMethod ? "h-31 opacity-100 rounded-md fade-down-cart" : "h-0 opacity-0 hidden"}`}>
-
-                                <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Retiro personalmente en Ameghino"), changeMenuDelivery()}}>
-                                    <p className='pl-1'>Retiro personalmente en Ameghino</p>
-                                </div>
+                    <div className='flex flex-col justify-between'>
+                        <div className='mb-30 flex flex-col gap-1'>
+                            <div className='relative'>
                                 
-                                <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Retiro personalmente en Salta"), changeMenuDelivery()}}>
-                                    <p className='pl-1'>Retiro personalmente en Salta</p>
-                                </div>
+                                <button title='delivery-method' className='border border-gray-600 flex w-full justify-between items-center text-[.9rem]  rounded-lg px-1 py-2 cursor-pointer hover:border-[#e97c00]' onClick={()=>changeMenuDelivery()}>
+                                    <span className='pl-1'>{optionDeliveryMethod}</span>
+                                    <img src={downArrowIcon} alt="arrow-down" className='invert h-4 w-4 select-none'/>
+                                </button>
                                 
-                                <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Envío un comisionista"), changeMenuDelivery()}}>
-                                    <p className='pl-1'>Envío un comisionista</p>
-                                </div>
+                                <div className={`w-74 transition-all duration-50 absolute mt-1 p-1 flex flex-col gap-0 bg-[#222] z-10 top-9 right-0 ${menuDeliveryMethod ? "h-40 opacity-100 rounded-md fade-down-cart" : "h-0 opacity-0 hidden"}`}>
 
+                                    <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Retiro personalmente en Ameghino"), changeMenuDelivery()}}>
+                                        <p className='pl-1'>Retiro personalmente en Ameghino</p>
+                                    </div>
+                                    
+                                    <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Retiro personalmente en Salta"), changeMenuDelivery()}}>
+                                        <p className='pl-1'>Retiro personalmente en Salta</p>
+                                    </div>
+                                    
+                                    <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Envío un comisionista a Ameghino"), changeMenuDelivery()}}>
+                                        <p className='pl-1'>Envío un comisionista a Ameghino</p>
+                                    </div>
+
+                                    <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionDelivery("Envío un comisionista a Salta"), changeMenuDelivery()}}>
+                                        <p className='pl-1'>Envío un comisionista a Salta</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className='relative '>
-                            <button title='payment-method' className='border border-gray-600 flex w-full justify-between items-center text-[.9rem] rounded-lg px-1 py-2 cursor-pointer hover:border-[#e97c00]' onClick={()=>changeMenuPayment()}>
-                                <span className='pl-1'>{optionPaymentMethod}</span>
-                                <img src={downArrowIcon} alt="arrow-down" className='invert h-4 w-4'/>
-                            </button>
+                            <div className='relative '>
+                                <button title='payment-method' className='border border-gray-600 flex w-full justify-between items-center text-[.9rem] rounded-lg px-1 py-2 cursor-pointer hover:border-[#e97c00]' onClick={()=>changeMenuPayment()}>
+                                    <span className='pl-1'>{optionPaymentMethod}</span>
+                                    <img src={downArrowIcon} alt="arrow-down" className='invert h-4 w-4'/>
+                                </button>
 
-                            <div className={`w-74 transition-all duration-50 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 -top-33 right-0 ${menuPaymentMethod ? "h-31 opacity-100 rounded-md fade-down-invert" : "h-0 opacity-0 hidden"}`}>
+                                <div className={`w-74 transition-all duration-50 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 -top-33 right-0 ${menuPaymentMethod ? "h-31 opacity-100 rounded-md fade-down-invert" : "h-0 opacity-0 hidden"}`}>
 
-                                <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Tarjeta"), changeMenuPayment()}}>  
-                                    <p className='pl-1'>Tarjeta de débito / crédito</p>
+                                    <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Tarjeta"), changeMenuPayment()}}>  
+                                        <p className='pl-1'>Tarjeta de débito / crédito</p>
+                                    </div>
+                                    <div className='group text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Transferencia (10% OFF)"), changeMenuPayment()}}>
+                                        <p className='pl-1'>Transferencia <span className='text-[#FF8904] group-hover:text-white'>10% OFF</span></p>
+                                    </div>
+                                    <div className='group text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Efectivo (20% OFF)"), changeMenuPayment()}}>
+                                        <p className='pl-1'>Efectivo <span className='text-[#FF8904] group-hover:text-white'>20% OFF</span></p>
+                                    </div>
+
                                 </div>
-                                <div className='group text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Transferencia (10% OFF)"), changeMenuPayment()}}>
-                                    <p className='pl-1'>Transferencia <span className='text-[#FF8904] group-hover:text-white'>10% OFF</span></p>
-                                </div>
-                                <div className='group text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Efectivo (20% OFF)"), changeMenuPayment()}}>
-                                    <p className='pl-1'>Efectivo <span className='text-[#FF8904] group-hover:text-white'>20% OFF</span></p>
-                                </div>
-
                             </div>
                         </div>
 
                         <div>
                             <div className={` bg-[#8f5300] text-[.9rem] text-center mt-1 p-2 rounded-md select-none ${confirm ? "cursor-pointer bg-[#e97c00]" : " "}`}>
-                                <a href="#" target='__blank' className={`${confirm ? "cursor-pointer bg-[#e97c00]" : "cursor-default"}`} onClick={(e)=>handleConfirm(e)}>Finalizar pedido vía WhatsApp</a>
+                            <button disabled={!confirm} className={`${confirm ? "cursor-pointer bg-[#e97c00]" : "cursor-default"} w-full h-full`} onClick={(e)=>handleConfirm(e)} >
+                                Finalizar pedido vía WhatsApp
+                            </button>
                             </div>
                         </div>
                     </div>
