@@ -1,5 +1,5 @@
 import product1Img from "../imgs/Harina000.png";
-import product2Img from "../imgs/levadura.png";
+import product2Img from "../imgs/Levadura.png";
 import product3Img from "../imgs/CremaIndividual.png";
 import product4Img from "../imgs/Micro105.jpg";
 
