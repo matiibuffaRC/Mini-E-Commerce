@@ -93,7 +93,7 @@ function Catalog() {
         }
     };
 
-    const handleProductClick = (productType: string) => {
+    const  handleProductClick = (productType: string) => {
         setProductsSelected(prev => prev === productType ? prev : productType);
         console.log("Producto seleccionado:", productType); 
     }
