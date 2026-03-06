@@ -37,7 +37,7 @@ function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
     },[])
 
     return (
-        <div className="h-17.5 w-screen fixed flex flex-row items-center justify-between px-6 bg-black shadow-md shadow-black/70 border-b border-white/10 text-white  z-10">
+        <div className="h-17.5 w-screen fixed flex flex-row items-center justify-between px-6 bg-black shadow-md shadow-black/70 border-b border-white/10 text-white  z-30">
             
             {/* Capa de opacidad */}
             <div 
@@ -64,7 +64,7 @@ function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
                         onClick={openMenu}/>
                 </div>
 
-                <nav className={`absolute border border-[#666] bg-black h-screen w-80 left-0 top-0 transition-transform duration-600 ease-in-out flex flex-col  ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:static md:h-full md:w-full md:translate-x-0 md:transition-none md:flex md:items-center md:border-none z-30`}>
+                <nav className={`absolute border border-[#666] bg-black h-screen w-80 left-0 top-0 transition-transform duration-600 ease-in-out flex flex-col  ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:static md:h-full md:w-full md:translate-x-0 md:transition-none md:flex md:items-center md:border-none z-50`}>
 
                     <div className="flex flex-col justify-center items-center mt-5 md:hidden ">
                         <img src={casaBuffaLogo} alt="Casa Buffa" className="h-28"/>

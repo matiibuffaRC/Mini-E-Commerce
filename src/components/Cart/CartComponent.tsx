@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useNavigate } from "react-router-dom";
 import downArrowIcon from "../../icons/down-arrow.png";
+import crossIcon from "../../icons/crossIcon.svg";
 import "../Animations/animations.css";
 
 type CartItem = {
@@ -45,8 +46,8 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
         
         setTotal(sumaTotal);
 
-        console.log("El total cambió: ", sumaTotal);
-        console.log(cart)
+        // console.log("El total cambió: ", sumaTotal);
+        // console.log(cart)
 
     },[cart])
 
@@ -59,13 +60,9 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
     },[optionPaymentMethod, optionDeliveryMethod, cart])
 
     useEffect(()=>{
-        if (optionPaymentMethod === "Transferencia (10% OFF)"){
-            setFinalPrice(Number((total - (total * 0.1)).toFixed(2)));
-        } else if (optionPaymentMethod === "Efectivo (20% OFF)"){
-            setFinalPrice(Number((total - (total * 0.2)).toFixed(2)));
-        } else {
-            setFinalPrice(Number(total.toFixed(2)));
-        }
+        if (optionPaymentMethod === "Transferencia (10% OFF)"){setFinalPrice(Number((total - (total * 0.1))));} 
+        else if (optionPaymentMethod === "Efectivo (20% OFF)"){setFinalPrice(Number((total - (total * 0.2))));} 
+        else {setFinalPrice(Number(total));}
     },[optionPaymentMethod, total])
 
     
@@ -127,6 +124,10 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                     const max = item.stock;
                     const current = Number(item.quantity) ?? 1; {/* Si no tiene cantidad definida, es 1 automaticamente */}
                     let action = signe === "add" ? current + 1 : current - 1;
+                    if (signe === "close"){
+                        action = 0;
+                    }
+
                     if (action > max) action = max;
                     return {
                         ...item,
@@ -156,16 +157,17 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
         return(
             cart.map((productCart:any) =>{ 
                 return(
-                    <div key={productCart.id} className='bg-[#232323] p-2 flex flex-row gap-1 flex-1'> {/* Este es cada producto elegido INDIVIDUAL*/}
+                    <div key={productCart.id} className='bg-[#232323] p-2 flex flex-row gap-1 flex-1 relative'> {/* Este es cada producto elegido INDIVIDUAL*/}
+                        <img src={crossIcon} alt="Cross icon" className='invert absolute w-4 h-4 top-1 right-1' onClick={()=>{changeQuantity("close", productCart.id)}}/>
                         <div>
                             <img src={productCart.img} alt={`${productCart.productName} image`} className='h-30 w-30' />
                         </div>
-                        <div className='flex-1 p-2 text-[1.1rem] flex flex-col gap-1'>
+                        <div className='flex-1 p-2 text-[1rem] flex flex-col justify-center gap-1'>
                             <h3>{productCart.productName}</h3>
                             <div className='flex flex-row items-center gap-1'>
-                                <div className='border border-gray-500 hover:bg-gray-500 px-2 pb-1 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer' onClick={()=>{changeQuantity('remove', productCart.id)}}>-</div>
+                                <div className='border border-gray-500 hover:bg-gray-500 px-2 pb-1 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed' onClick={()=>{changeQuantity('remove', productCart.id)}}>-</div>
                                 <div className='text-[.9rem] flex flex-row justify-center items-center px-1 py-1.5 select-none'>{productCart.quantity}</div>
-                                <div className='border border-gray-500 hover:bg-gray-500 px-2 pb-1 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer' onClick={()=>{changeQuantity('add',productCart.id)}}>+</div>
+                                <div className={`border border-gray-500 hover:bg-gray-500 px-2 pb-1 rounded-[10px] flex flex-row justify-center items-center select-none cursor-pointer ${productCart.quantity >= productCart.stock ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={()=>{if(productCart.quantity < productCart.stock) changeQuantity('add',productCart.id)}}>+</div>
                             </div>
                             <h4 className='text-[.8rem]'>${productCart.total}</h4>
                         </div>

@@ -93,15 +93,15 @@ function ProductPage({ setCart }: productPageProps){
             setClosing(false)
         },300)
 
-    },2000)
+    },2500)
 }
 
     return (
         <div className="min-h-[calc(100dvh-100px)] md:min-h-[calc(100dvh-74px)] pt-18 relative bg-[#111] flex flex-col items-center justify-center text-white">
             {notification && (
-                <div className={`text-[.8rem] md:text-[1rem] fixed bg-green-500/80 border-2 border-green-500 text-white py-5 px-7 rounded-xl shadow-lg z-50 transition-all duration-300 top-22 left-5 ${closing ? "toast-exit" : "toast-enter"}`}>
-                    <img src={crossIcon} alt="Cross Icon" className="fixed top-1 right-1 w-4 h-4 brightness-0 saturate-100 invert sepia hue-rotate-80 cursor-pointer" onClick={()=>{setNotification(false)}}/>
-                    Producto agregado!
+                <div className={`text-[1rem] md:text-[1rem] fixed bg-green-500/30 border-2 border-green-500 text-white py-4 px-7 md:py-5 md:px-7 rounded-xl shadow-lg z-10 transition-all duration-300 top-20 md:top-21 left-3 md:left-3 ${closing ? "toast-exit" : "toast-enter"}`}>
+                    <img src={crossIcon} alt="Cross Icon" className="fixed top-1 right-1 w-5 h-5 brightness-0 saturate-100 invert sepia hue-rotate-80 cursor-pointer p-0.5 rounded-[50%] hover:bg-green-500/40" onClick={()=>{setNotification(false), setClosing(false)}}/>
+                    ¡Producto agregado!
                 </div>
             )}
             <div className="flex flex-col md:flex-row mx-5 bg-[#1a1a1a] md:w-xl lg:w-3xl p-5 gap-3 relative">
@@ -116,7 +116,7 @@ function ProductPage({ setCart }: productPageProps){
 
                 <div className="flex flex-col justify-between">
                     
-                    <div className="md:w-80 px-4">
+                    <div className="md:w-80 px-4 mb-10 md:mb-0">
                         <h2 className="text-[1.5rem] md:text-[1.6rem] border-b border-gray-400 mb-2">{product.productName}</h2>
                         <h3 className="text-[.9rem] text-gray-400">Stock: {product.stock} unidades</h3>
                         <h3 className="text-[1.4rem] md:text-[1.6rem]">${product.price}</h3>
@@ -144,7 +144,7 @@ function ProductPage({ setCart }: productPageProps){
                             }}/>
                             <div className="px-2 py-1 border border-white rounded-r-[25px] select-none cursor-pointer" onClick={()=>handleQuantityChange("add")}>+</div>
                         </div>
-                        <div className="border border-[#FF8904] py-1 px-4 rounded-[25px] bg-[#FF8904] select-none cursor-pointer hover:bg-[#e97c00]" onClick={()=>{
+                        <div className="border border-[#FF8904] py-1.5 px-4 rounded-[25px] bg-[#FF8904] select-none cursor-pointer hover:bg-[#e97c00]" onClick={()=>{
                             addProductToCart(product, quantity)
                             showNotification()
                         }}>
