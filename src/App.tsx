@@ -2,6 +2,7 @@ import HeaderComponent from "./components/Header/HeaderComponent";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTopComponent";
 import FooterComponent from "./components/Footer/FooterComponent";
 import CartComponent from "./components/Cart/CartComponent";
+import type { CartItem } from "./components/Cart/CartComponent";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,7 +12,7 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import Catalog from "./pages/Catalog/Catalog";
 
 function App() {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [openCart, setOpenCart] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <>
-      <HeaderComponent handleClick={handleClickToOpenCart} setOpenCart={setOpenCart}></HeaderComponent>
+      <HeaderComponent handleClick={handleClickToOpenCart} cart={cart}></HeaderComponent>
       <CartComponent handleClick={handleClickToOpenCart} openCart={openCart} setOpenCart={setOpenCart} cart={cart} setCart={setCart} total={total} setTotal={setTotal}></CartComponent>
       <ScrollToTop /> 
       <Routes>

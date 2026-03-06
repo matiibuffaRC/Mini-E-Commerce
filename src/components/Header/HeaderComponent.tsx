@@ -1,18 +1,16 @@
 import menuIcon from "../../icons/barsIcon.svg";
 import closeMenuIcon from "../../icons/crossIcon.svg";
 import { useEffect, useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
 import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg";
-import cartIcon from "../../icons/shopping-cart.png";
+import type { CartItem } from "../Cart/CartComponent";
 import { Link } from "react-router-dom";
 
 type HeaderComponentProps = {
     handleClick: () => void;
-    
-    setOpenCart: Dispatch<SetStateAction<boolean>>;
+    cart: CartItem[];
 }
 
-function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
+function HeaderComponent({ handleClick, cart }: HeaderComponentProps) {
     const [menuOpen, setMenuOpen] = useState<boolean>(false); {/**Determinamos si el menú hamburguesa estará disponible */}
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024); {/* Trabajamos con un booleano */}
 
@@ -85,8 +83,9 @@ function HeaderComponent({ handleClick, setOpenCart }: HeaderComponentProps) {
                                     Productos
                                 </Link>
                             </li>
-                            <li className="py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] select-none cursor-pointer transition duration-300" onClick={() => { handleClick(); if(isMobile) openMenu();}}>
-                                Cart 
+                            <li className="relative py-0 my-7.5 md:my-0 pl-2 text-[1.2rem] border-l border-white md:border-none md:px-5 md:py-1 md:rounded-[25px] md:text-[1rem] md:hover:bg-[#FF8904] select-none cursor-pointer transition duration-300" onClick={() => { handleClick(); if(isMobile) openMenu();}}>
+                                Cart
+                                <div className={`absolute w-3 h-3 bg-red-500/80 -top-1 right-0 flex justify-center items-center p-2 rounded-[50%] text-[.8rem] ${isMobile ? "hidden" : "absolute"} ${cart.length === 0 ? "hidden" : "absolute"}`}>{cart.length}</div> 
                             </li>
                         </ul>
                     </div>

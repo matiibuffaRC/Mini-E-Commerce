@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import crossIcon from "../../icons/crossIcon.svg";
+import arrowIcon from "../../icons/down-arrow.png";
 import threeDotsIcon from "../../icons/threeDots.svg";
 import { products } from "../../assets/data/Products.ts";
 import { Link } from 'react-router-dom';
@@ -41,15 +42,15 @@ function Catalog() {
         },{
             id: 3,
             title: "Repostería",
-            items: ["Cremas", "B", "C"]
+            items: ["Cremas", "Chocolates", "Pastas"]
         },{
             id: 4,
             title: "Descartables",
-            items: ["Bandejas plasticas", "B", "C"]
+            items: ["Bandejas plasticas", "Telgopor", "Carton", "Maderas"]
         },{
             id: 5,
             title: "Cotillón",
-            items: ["A", "B", "C"]
+            items: ["Velas", "Bengalas", "Globos"]
         }
     ]
 
@@ -63,8 +64,11 @@ function Catalog() {
                 {
                     arrayItems.map((item)=>{
                         return (
-                            <div key={item.id} >
-                                <p onClick={()=>handleClick(item.id)} className={`p-4 py-1 text-[1rem] select-none cursor-pointer hover:text-[#FF8904] ${selected === item.id ? "text-[#ff8800]" : "text-white"}`}>{item.title}</p>
+                            <div key={item.id} className='px-2'>
+                                <div className='flex flex-row justify-start items-center'>
+                                    <img src={arrowIcon} alt="Arrow Icon" className={`invert w-4.5 h-4.5 pl-1 transition-rotate duration-200 ${selected ===  item.id? "rotate-180" : ""} ${(item.title === "Todos los productos") ? "hidden" : " "}`}/>
+                                    <p onClick={()=>handleClick(item.id)} className={`p-1 text-[1rem] select-none cursor-pointer hover:text-[#FF8904] ${selected === item.id ? "text-[#ff8800]" : "text-white"}`}>{item.title}</p>
+                                </div>
                                 <ul className={`overflow-hidden transition-all duration-300 ${selected === item.id ? "max-h-40 opacity-100 text-[#FF8904]" : "max-h-0 opacity-0 text-white"} `}>
                                     {item.items.map((subItem)=>{
                                         return (

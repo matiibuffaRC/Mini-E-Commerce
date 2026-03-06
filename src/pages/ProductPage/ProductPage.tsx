@@ -4,12 +4,13 @@ import { products } from "../../assets/data/Products";
 import { useState } from "react";
 import arrowIcon from "../../icons/arrowIcon.svg";
 import crossIcon from "../../icons/crossIcon.svg";
+import type { CartItem } from "../../components/Cart/CartComponent";
 import "../../components/Animations/animations.css";
 
 
 
     type productPageProps = {
-        setCart: React.Dispatch<React.SetStateAction<any[]>>;
+        setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
     }
 
 function ProductPage({ setCart }: productPageProps){
@@ -72,7 +73,7 @@ function ProductPage({ setCart }: productPageProps){
             }
 
             // nuevo producto
-            const productToAddToCart = {
+            const productToAddToCart: CartItem = {
                 ...product,
                 quantity: Math.min(quantity, max),
                 total: Math.min(quantity, max) * product.price,
@@ -126,7 +127,7 @@ function ProductPage({ setCart }: productPageProps){
                         <div className="border border-white flex flex-row gap-2 rounded-[25px]">
                             <div className="px-2 py-1 border border-white rounded-l-[25px] select-none cursor-pointer" onClick={()=>handleQuantityChange("remove")}>-</div>
                             {/* <div className="px-2 py-1">{quantity}</div> */}
-                            <input type="number" value={quantity} min={1} max={product.stock} placeholder="1" className="w-8 focus:outline-0 no-arrows" onChange={(e)=>{
+                            <input type="number" value={quantity} min={1} max={product.stock} placeholder="1" className="text-center w-8 focus:outline-0 no-arrows" onChange={(e)=>{
                                 const value = e.target.value;
                                 if(value === ''){
                                     setQuantity(0);
