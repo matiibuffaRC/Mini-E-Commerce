@@ -51,40 +51,6 @@ const products: Product[] = [
         type:"Bandejas plasticas",
         outstanding: true
     }
-    ,{
-        id: 5,
-        productName: "Harina 0000",
-        price: 13700,
-        stock: 45,
-        img: product1Img,
-        type:"Harinas",
-        outstanding: true
-    },
-    {
-        id: 6,
-        productName: "Leudante",
-        price: 13700,
-        stock: 45,
-        img: product1Img,
-        type:"Harinas",
-        outstanding: true
-    },{
-        id: 7,
-        productName: "Harina terminada",
-        price: 13700,
-        stock: 45,
-        img: product1Img,
-        type:"Harinas",
-        outstanding: true
-    },{
-        id: 8,
-        productName: "Harina premezcla",
-        price: 13700,
-        stock: 45,
-        img: product1Img,
-        type:"Harinas",
-        outstanding: true
-    }
 ]
 
 export { products }
