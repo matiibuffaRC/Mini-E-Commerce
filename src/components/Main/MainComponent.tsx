@@ -2,14 +2,14 @@
 import CaruselComponent from "../Carusel/CaruselComponent";
 import CaruselTextsComponent from "../CaruselTexts/CaruselTextsComponent";
 import CaruselProductsComponent from "../CaruselProducts/CaruselProductsComponent";
-import casaBuffa from "../../assets/imgs/casaBuffaLogo.png"
+import casaBuffa from "../../assets/imgs/casaBuffaLogo - Editado.png"
 import { CaruselImages } from "../../assets/data/CaruselImages.ts";
 import { products } from "../../assets/data/Products.ts";
 import { texts } from "../../assets/data/TextsCarusel.ts";
 import "../Animations/animations.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import MapsComponent from "../Maps/MapsComponent";
+
 
 
 function MainComponent() {
@@ -41,7 +41,7 @@ function MainComponent() {
         .map(product => (
             <div key={product.id} className="product-container max-w-70 md:max-w-60 bg-[#eee] p-2">
                 <Link to={`/producto/${product.id}`}>
-                <div className="w-50 h-50 md:h-35 md:w-35 lg:w-45 lg:h-45 flex justify-center items-center">
+                <div className="w-50 h-50 md:h-35 md:w-35 lg:w-45 lg:h-45 flex justify-center items-center ">
                     <img
                         src={product.img}
                         alt={product.productName}
@@ -102,10 +102,7 @@ function MainComponent() {
                     {printProducts()}
                 </div>
             </div>
-            <div className="p-2 my-10">
-                <h3 className="text-center my-3 text-[1.4rem] ">Encontranos en la ciudad!</h3>
-                <MapsComponent></MapsComponent>
-            </div>
+            
         </div>
     )
 }

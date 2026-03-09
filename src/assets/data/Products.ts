@@ -35,7 +35,7 @@ const products: Product[] = [
     },
     {
         id: 3,
-        productName: "Crema ledevit x500gr",
+        productName: "Crema ledevit",
         price: 5800,
         stock: 8,
         img: product3Img,

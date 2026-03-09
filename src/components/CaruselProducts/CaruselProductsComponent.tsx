@@ -11,7 +11,7 @@ function CaruselProductsComponent({ products }: CaruselProductsComponentProps) {
     const productExibidos = products.filter(product => product.id < 4);
 
     return (
-        <div className="w-full flex flex-row justify-center items-center p-3">
+        <div className="w-full flex flex-row justify-center items-center p-3 ">
             <IgrCarousel hideIndicators={true} className="bg-transparent">
                 {
                     productExibidos.map(product => (
@@ -28,7 +28,7 @@ function CaruselProductsComponent({ products }: CaruselProductsComponentProps) {
                                 </div>
 
                                 <div className="text-black p-1">
-                                    <h3 className="text-[1.1rem] md:text-[.9rem] py-1">
+                                    <h3 className="text-[1.1rem] md:text-[.9rem] text-center py-1">
                                         {product.productName}
                                     </h3>
                                 </div>
