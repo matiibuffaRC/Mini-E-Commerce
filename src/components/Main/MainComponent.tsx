@@ -14,25 +14,35 @@ import { Link } from "react-router-dom";
 
 function MainComponent() {
     
-    const [visible, setVisible] = useState(false);
+    const [visibleCaruselProducts, setVisibleCaruselProducts] = useState(false);
     const productsRef = useRef<HTMLDivElement>(null); {/* Con esto estamos haciendo referencia a una DIV que todavía no existe */}
 
+    const [visibleCaruselImages, setVisibleCaruselImages] = useState(false);
+    const imagesRef = useRef<HTMLDivElement>(null);
+
+
+
+
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setVisible(true);
-                }
-            },
-            { threshold: 0.2 }
-        );
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
 
-        if (productsRef.current) {
-            observer.observe(productsRef.current);
-        }
+            if (entry.target === productsRef.current && entry.isIntersecting) {
+                setVisibleCaruselProducts(true);
+            }
 
-        return () => observer.disconnect();
-    }, []);
+            if (entry.target === imagesRef.current && entry.isIntersecting) {
+                setVisibleCaruselImages(true);
+            }
+
+        });
+    }, { threshold: 0.2 });
+
+    if (productsRef.current) observer.observe(productsRef.current);
+    if (imagesRef.current) observer.observe(imagesRef.current);
+
+    return () => observer.disconnect();
+}, []);
 
     function printProducts() {
     return products
@@ -76,7 +86,7 @@ function MainComponent() {
 
                 </div>
             </div>
-            <div className="my-5 md:my-10 flex flex-col justify-center items-center md:flex-row lg:w-5xl">
+            <div className="my-5 md:my-10 flex flex-col justify-center items-center md:flex-row lg:w-5xl fade-down">
                 <div className="md:flex-1 flex flex-row justify-center items-center md:ml-10 lg:ml-25">
                     <img src={casaBuffa} alt="Casa Buffa logo" className="hidden md:inline w-50 md:w-75"/>
                 </div>
@@ -87,10 +97,9 @@ function MainComponent() {
                     </h3>
                 </div>
             </div>
-            <div className="w-screen mx-4 md:my-2.5 lg:my-10 py-5 z-5 lg:w-4xl flex flex-row justify-center items-center">
-                <CaruselComponent images={CaruselImages}></CaruselComponent> 
-                {/* Estamos pasando un arreglo[] como props */}
-            </div>
+            <div ref={imagesRef} className={`w-screen mx-4 md:my-2.5 lg:my-10 py-5 z-5 lg:w-4xl flex flex-row justify-center items-center  ${visibleCaruselImages ? "fade-down" : "opacity-0"}`}>
+                <CaruselComponent images={CaruselImages}/>
+</div>
             
             <div className="my-10 flex flex-col justify-center items-center md:max-w-3xl lg:w-5xl bg-[#eee] md:bg-transparent">
                 <h2 className="bg-orange-400 max-w-70 md:max-w-200 text-center text-[1.3rem] md:text-[1.5rem] py-1 px-5 m-2 md:m-3 text-wrap">Nuestros destacados del momento</h2>
@@ -98,7 +107,7 @@ function MainComponent() {
                     <CaruselProductsComponent products={productosDestacados}></CaruselProductsComponent>
                 </div>
                 
-                <div ref={productsRef}className={`hidden md:flex flex-row justify-center items-center gap-1 md:gap-3 md:m-4 md:mb-10 ${visible ? "fade-down" : "opacity-0"}`}> 
+                <div ref={productsRef}className={`hidden md:flex flex-row justify-center items-center gap-1 md:gap-3 md:m-4 md:mb-10 ${visibleCaruselProducts ? "fade-down" : "opacity-0"}`}> 
                     {printProducts()}
                 </div>
             </div>
