@@ -119,7 +119,7 @@ function Catalog() {
                     )
             }else{
                 return filteredProducts.map(product => (
-                <div key={product.id} className="bg-[#eee] transition-all duration-200 fade-down rounded-xl overflow-hidden hover:scale-101 shadow-md hover:shadow-lg">
+                <div key={product.id} className="bg-[#eee] max-w-50 transition-all duration-200 fade-down rounded-xl overflow-hidden hover:scale-101 shadow-md hover:shadow-lg">
                     <Link to={`/producto/${product.id}`}>
                         <div className="w-full h-50 overflow-hidden">
                             <img src={product.img} alt="Product image" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
@@ -141,14 +141,14 @@ function Catalog() {
     return (
         <div className='pt-18 bg-black min-h-screen text-white flex flex-col lg:flex-row pb-0 lg:gap-4 h-[calc(100vh-72px)]'>
             
-            <div className='mx-4 my-4 lg:mx-0 lg:ml-4 lg:mr-0 lg:my-4 lg:border lg:border-[#666] py-3 overflow-hidden'>
+            <div className='mx-4 my-4 lg:mx-0 lg:ml-4 lg:mr-0 lg:my-4 lg:border lg:border-white/10 py-3 overflow-hidden'>
 
                 <div className="bg-[#111] p-2 relative lg:hidden flex flex-row justify-start items-center gap-1  border border-[#666]">
                     <img src={threeDotsIcon} alt="Three dots" className='invert h-3 w-3'/>
                     <h3 onClick={toggleMenu} className='select-none cursor-pointer hover:text-[#FF8904]'>Categorías</h3>
                 </div>
                 
-                <section className={`transition-translate duration-350 h-full border border-[#666] lg:border-none absolute lg:inline bg-black z-5 ${menuOpen ? "-translate-x-5 top-18" : "-translate-x-90 top-18"} lg:translate-x-0 lg:static`}>
+                <section className={`transition-translate duration-350 h-full border border-white/10 lg:border-none absolute lg:inline bg-black z-5 ${menuOpen ? "-translate-x-5 top-18" : "-translate-x-90 top-18"} lg:translate-x-0 lg:static`}>
                     <div className='px-3 lg:px-0'>
                         {printMenu()}
                     </div>
@@ -156,9 +156,9 @@ function Catalog() {
                 
             </div>
 
-            <div className="flex-1 mx-4 lg:mr-5 lg:ml-0 my-4 lg:my-4 p-5 border border-[#666] overflow-y-auto">
-                <div key={productsSelected} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {printProducts(productsSelected)}
+            <div className="flex-1 mx-4 lg:mr-5 lg:ml-0 my-4 lg:my-4 p-5 border border-white/10 overflow-y-auto">
+                <div key={productsSelected} className="grid grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 justify-items-center" >
+                {printProducts(productsSelected)}
                 </div>
             </div>
         </div>
