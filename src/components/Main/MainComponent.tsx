@@ -87,7 +87,7 @@ function MainComponent() {
                     </h3>
                 </div>
             </div>
-            <div className="w-screen mx-4 md:my-2.5 py-5 z-5 lg:w-4xl flex flex-row justify-center items-center">
+            <div className="w-screen mx-4 md:my-2.5 lg:my-10 py-5 z-5 lg:w-4xl flex flex-row justify-center items-center">
                 <CaruselComponent images={CaruselImages}></CaruselComponent> 
                 {/* Estamos pasando un arreglo[] como props */}
             </div>
