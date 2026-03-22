@@ -250,7 +250,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                                     <img src={downArrowIcon} alt="arrow-down" className={`invert h-4 w-4 transition-rotate duration-400 ${menuPaymentMethod ? "rotate-180" : ""}`}/>
                                 </button>
 
-                                <div className={`w-83.75 md:w-104 transition-all duration-400 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 -top-33 right-0 ${menuPaymentMethod ? "h-31 opacity-100 rounded-md fade-down-invert" : "h-0 opacity-0 hidden"}`}>
+                                <div className={`w-84 md:w-104 transition-all duration-400 absolute mt-1 p-1 flex flex-col gap-1 bg-[#222] z-10 -top-34 right-0 ${menuPaymentMethod ? "h-32.5 opacity-100 rounded-md fade-down-invert" : "h-0 opacity-0 hidden"}`}>
 
                                     <div className='text-[.9rem] text-gray-300 rounded-md px-1 py-2 select-none cursor-pointer hover:bg-[#e97c00] hover:text-white' onClick={()=>{changeOptionPayment("Tarjeta"), changeMenuPayment()}}>  
                                         <p className='pl-1'>Tarjeta de débito / crédito</p>
