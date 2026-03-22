@@ -185,7 +185,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
             </div>
             
             {/* Panel del carrito */}
-            <div className={`h-full w-90 md:w-110 bg-black fixed top-0 right-0 z-40 transition-transform duration-300 ease-in-out border-l border-[#666] ${openCart ? "translate-x-0" : "translate-x-full"} flex flex-col justify-between`}>
+            <div className={`h-full w-90 md:w-80 bg-black fixed top-0 right-0 z-40 transition-transform duration-300 ease-in-out border-l border-[#666] ${openCart ? "translate-x-0" : "translate-x-full"} flex flex-col justify-between`}>
                 <div className="flex justify-between items-center p-5 border-b border-[#666] ">
                     <h2 className="text-white text-[1.2rem]">Mi carrito ({cart.length})</h2>
                     <div className="cursor-pointer hover:bg-[#444] rounded-[50%]" onClick={handleClick}>
@@ -200,7 +200,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                     </div>
                 </div>
 
-                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-[90%] max-h-80'>
+                <div className='border-t border-gray-500 text-white py-6 px-3 flex flex-col justify-between gap-2 h-[85%] max-h-76'>
                     
                     <div className='border-t border-gray-300'>
                         <div className='flex justify-between'>
@@ -216,7 +216,7 @@ function CartComponent({ handleClick, openCart, cart, setCart, total, setTotal}:
                     </div>
 
                     <div className='flex flex-col justify-between max-h-60'>
-                        <div className='mb-25 flex flex-col gap-1'>
+                        <div className='mb-15 flex flex-col gap-1'>
                             <div className='relative'>
                                 
                                 <button title='delivery-method' className='border border-gray-600 flex w-full justify-between items-center text-[.9rem]  rounded-lg px-1 py-2 cursor-pointer hover:border-[#e97c00] hover:bg-[#111]' onClick={()=>changeMenuDelivery()}>
