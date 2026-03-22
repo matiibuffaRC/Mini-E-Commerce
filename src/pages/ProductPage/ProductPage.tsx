@@ -98,7 +98,7 @@ function ProductPage({ setCart }: productPageProps){
 }
 
     return (
-        <div className="min-h-[calc(100dvh-100px)] md:min-h-[calc(100dvh-74px)] pt-18 relative bg-[#111] flex flex-col items-center justify-center text-white">
+        <div className="min-h-screen py-20 relative bg-[#111] flex flex-col items-center justify-center text-white">
             {notification && (
                 <div className={`text-[1rem] md:text-[1rem] fixed bg-green-500/30 border-2 border-green-500 text-white py-4 px-7 md:py-5 md:px-7 rounded-xl shadow-lg z-10 transition-all duration-300 top-20 md:top-21 left-3 md:left-3 ${closing ? "toast-exit" : "toast-enter"}`}>
                     <img src={crossIcon} alt="Cross Icon" className="fixed top-1 right-1 w-5 h-5 brightness-0 saturate-100 invert sepia hue-rotate-80 cursor-pointer p-0.5 rounded-[50%] hover:bg-green-500/40" onClick={()=>{setNotification(false), setClosing(false)}}/>
