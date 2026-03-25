@@ -8,7 +8,7 @@ type CaruselComponentProps = {
 function CaruselComponent({images}: CaruselComponentProps) {
     return (
         <div className='w-screen h-75 md:h-100 lg:h-120  overflow-hidden'>
-            <IgrCarousel hideNavigation={true}  interval={5000} disablePauseOnInteraction={true}>
+            <IgrCarousel hideNavigation={true} hideIndicators={true}  interval={5000} disablePauseOnInteraction={true}>
                 {
                     images.map((image, indice) => {
                         return(
