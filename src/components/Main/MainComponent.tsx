@@ -99,7 +99,7 @@ function MainComponent() {
             </div>
             <div ref={imagesRef} className={`w-screen mx-4 md:my-2.5 lg:my-10 py-5 z-5 lg:w-4xl flex flex-row justify-center items-center  ${visibleCaruselImages ? "fade-down" : "opacity-0"}`}>
                 <CaruselComponent images={CaruselImages}/>
-</div>
+            </div>
             
             <div className="my-10 flex flex-col justify-center items-center md:max-w-3xl lg:w-5xl bg-[#eee] md:bg-transparent">
                 <h2 className="bg-orange-400 max-w-70 md:max-w-200 text-center text-[1.3rem] md:text-[1.5rem] py-1 px-5 m-2 md:m-3 text-wrap">Nuestros destacados del momento</h2>

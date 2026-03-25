@@ -139,7 +139,7 @@ function Catalog() {
     }
 
     return (
-        <div className='pt-18 bg-black min-h-screen text-white flex flex-col md:justify-start lg:justify-center lg:flex-row h-[calc(100vh-72px)]'>
+        <div className='py-18 bg-black min-h-screen text-white flex flex-col md:justify-start lg:justify-center lg:flex-row'>
             
             <div className='flex flex-col lg:flex-row lg:w-6xl lg:gap-3 my-5 md:justify-start lg:justify-center'>
                 <section className='mx-4 my-4 lg:mx-0 lg:ml-4 lg:mr-0 lg:my-4 lg:border lg:border-white/10 py-3 overflow-hidden'>
